@@ -1,0 +1,209 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Capoeira Workshop in Trier 2015 
+    link(href='css/main.css', rel='stylesheet')
+    script(type='text/javascript',src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDhsRUuUV9tbiOuTdrqiasqwhgRCj4JLxU&sensor=false')
+    script
+      :coffee
+        google.maps.event.addDomListener window, 'load', ->
+          pos = new google.maps.LatLng(49.7424362,6.6941286)
+          map = new google.maps.Map document.getElementById('workshop-location'),
+            zoom: 17
+            center: pos
+            scrollwheel: false
+          marker = new google.maps.Marker
+            position: pos
+            map: map
+            title: 'test'
+          infoWindow = new google.maps.InfoWindow
+            content: '<h4>Sportverein FSV Trier-Tarforst e.V.</h4>
+                      <address>
+                        Kohlenstraße 57<br />
+                        54296 Trier<br />
+                        Deutschland<br />
+                        <br />
+                        <a href="http://www.fsv-trier-tarforst.de/">fsv-trier-tarforst.de</a>
+                      </address>'
+          infoWindow.open(map,marker)
+          google.maps.event.addListener marker, 'click', ->
+            infoWindow.open(map,marker)
+  body
+    .row
+      .large-3.columns
+        //- h1: img(src="http://placehold.it/400x100&text=Logo")
+      .large-9.columns
+        ul.right.button-group
+          li: a.button.active(href='index.html') Workshop Trier 2015
+          li: a.button(href='capoeira-trier.html') Uni-Sport Capoeira Trier 
+          li: a.button(href='kontakt.html') Kontakt
+    .row
+      .large-12.columns
+        .slider
+          img(src='http://placehold.it/1000x400&text=[ img 1 ]')
+        hr
+
+    .row 
+      .large-4.columns
+        img(src='img/workshop-hintergrund.jpg', width='400')
+        h4 Hintergrund
+        p Bei einer Reise im Frühling 2015 nach Sankt Petersburg lernte Denis Kruschinski (Übungsleiter Capoeira UniSport-Trier) 
+          | auf einem Seminar mit Mestre Chiquinho Juan Duarte und Maria Emelianenkova kennen, welche die dortige Gruppe Senzala 
+          | Capoeira Sankt Petersburg leiten. Die Art und Weise wie Neulinge in dieser Gruppe aufgenommen und integriert werden 
+          | haben Denis stark beeindruckt. Wenn man noch fremd in einer Stadt ist, kann es manchmal schwer sein Anschluss zu finden. 
+          | Doch nach dem Workshop kamen Einladungen zum gemeinsamen Capoeira Training 
+          | zum Akrobatik-Training und zu Tanzabenden, welche bis fünf Uhr morgens andauerten. Juan und Maria stellten viele Fragen
+          | zu Trier und unserer Capoeira-Gruppe. Obwohl sie bereits viel in Europa und Südamerika gereist sind, haben sie Deutschland
+          | noch nie gesehen. Denis beschloss die beiden nach Trier einzuladen.
+
+      .large-4.columns
+        img(src='img/workshop-juan.jpg', width='400')
+        h4 Juan Carlos Duarte Espitia
+        p Juan kommt Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.
+      .large-4.columns
+        img(src='img/workshop-senzala.jpg', width='400')
+        h4 Senzala Capoeira St. Petersburg
+        p Den ersten Kontakt zur Gruppe Capoeira Senzala hatte Maria Emelianenkova bei einem Workshop mit Mestre Toni Vargas in Kolumbien. 
+          | Beeindruckt vom Stil, Musik und vor allem dem gegenseitigen Umgang innerhalb der Gruppe. Danach lernte sie Mestre Chiquinho 
+          | welcher regelmäßig nach Sankt Petersburg reist um die dortige Gruppe zu Unterrichten.
+
+
+    .row: .large-12.columns: .panel
+      h4 Ort und Anfahrt
+      #workshop-location
+
+    .row 
+      .large-4.columns
+        img(src='img/workshop-training.jpg', width='400')
+        h4 Capoeira
+        p Afrikanische Sklaven in Brasilien tarnten ihr Kampfsportraining als Tanz. So entstand die Capoeira und 
+          | ermöglichte ihnen Selbstverteidigung zu erlerenen um sich zu befreien. Spielerisch werden Bewegungen aus 
+          | bekannten Kampfkünsten mit akrobatischen Elementen kombiniert oder mit Tanzelementen verschleiert, so 
+          | dass eine explosive Mischung entsteht. Die Teilnehmer erleben ein anspruchsvolles Ganzkörpertraining 
+          | bei dem sie Rhythmik, Koordination und Reaktionsvermögen perfektionieren.
+      .large-4.columns
+        img(src='img/workshop-musik.jpg', width='400')
+        h4 Musik
+        p Musik spielt in der Capoeira die Hauptrolle. Das wichtigste Instrument ist die Berimbau. Sie leitet das Spiel in 
+          | der Roda (vergleichbar mit Sparring) und bestimmt auch den Kontext des Spiels. Manchmal kann ein Spiel freundlich
+          | sein, das heißt frei von geraden Tritten, welche für Anfänger schwer vorauszusehen sind, aber auch taktisch und hinterlistig, was
+          | grade für Anfänger sehr gefährlich sein kann, weil aus einem Langsamen Spiel plötzlich ein schneller Tritt möglich wäre.
+          | Weitere bekannte Instrumente sind zum Beispiel die Atabaque und das Pandeiro. Die Lieder werden auf Portugiesisch gesungen
+          | und stammen unter anderem aus der Sklavenzeit.
+      .large-4.columns
+        img(src='img/workshop-bateria.jpg', width='400')
+        h4 Das Spiel in der Roda
+        p Bei der #[em Roda] (portugiesisch für Kreis) stehen die Teilnehmer in einem Kreis. In diesem Kreis findet 
+          | das Capoeira-Spiel statt, eine Art Frage-und-Antwort-Spiel, ein körperlicher Dialog. Dabei kann eine Bewegung als Frage
+          | verstanden werden und die Antwort vom Partner kommt ebenfalls in Form einer Bewegung. 
+          | "Ob dabei eher die Kooperation oder die Konfrontation im Vordergrund steht, entscheiden die Spieler selbst" [Wikipedia:Capoeira]
+          | Das Spiel kann jederzeit einfach so beendet werden.
+
+    .row: .large-12.columns
+      h4 Der Referent: Juan Duarte
+      .flex-video: iframe(width='420', height='315', src='https://www.youtube.com/embed/5In7XsXO_kY', frameborder='0', allowfullscreen)
+
+    .row
+      .large-12.columns: h4 Programm
+      .large-6.columns
+        h5 Samstag, 17. Oktober (Tag 1)
+        table
+          thead: tr
+            th Uhrzeit 
+            th Programm
+            th Ort
+          tbody
+            tr
+              td: strong 14:00-17:00
+              td: strong Training, Musik, Roda
+              td: strong FSV Trier-Tarforst 
+            tr
+              td 18:00-20:00
+              td Gemeinsam Abendessen (optional)
+              td Spontane Entscheidung
+            tr
+              td ab 22:00
+              td Open-End-Party mit Caipirinha und Musik (optional)
+              td Salvianstraße (privat)
+
+      .large-6.columns
+        h5 Sonntag, 18. Oktober (Tag 2)
+        table
+          thead: tr
+            th Uhrzeit
+            th Programm
+            th Ort
+          tbody
+            tr
+              td 10:00-12:00
+              td Gemeinsames Frühstück mit Portugiesisch Crash-Kurs (optinal)
+              td Salvianstraße (privat)
+            tr
+              td: strong 13:00-16:00
+              td: strong Training, Musik, Roda
+              td: strong FSV Trier-Tarforst
+            tr
+              td 17:00-19:00
+              td Gemeinsames Abendessen (optional)
+              td Spontane Entscheidung
+      
+    .row 
+      .large-12.columns: .panel
+        h4 Fragen und Antworten
+
+        h5 1. Welche Ausrüstung ist zum Workshop mitzubringen?
+        p T-Shirt, Sporthose und ein paar Hallenschuhe. Übrlicherweise wird ohne Schuhe und Socken trainiert. 
+          | Die Schuhe wirst Du wahrscheinlich trozdem brauchen. ;-)
+        
+        h5 2. Werden besondere sportliche Fähigkeiten vorausgesetzt?
+        p Nein, jeder kann teilnehmen. Nur Mut. :-)
+        
+        h5 3. Muss ich einen Handstand können?
+        p Nein. Die akrobatischen Elemente werden oft bei Capoeira-Vorführungen gezeigt sind aber tatsächlich kein wichtiger Bestandteil der Capoeira.
+          | Aber natürlich könntest Du mit Hilfe der Capoeira schnell den Handstand erlernen.
+
+        h5 4. In welcher Sprache findet der Unterricht statt.
+        p Unterricht wird in der deutschen Sprache durchgeführt. Englisch, Spanisch, Portugiesisch und Russisch werden bei Bedarf auch angeboten. 
+
+        h5 5. Ich möchte nur beim Capoeira-Unterricht teilnehen aber nicht beim Frühstück/Party/Essen. Ist das möglich?
+        p Ja klar.
+
+        h5 6. Frage gestrichen.
+        p Antwort gestrichten.
+        
+        h5 7. Darf ich an nur einem Tag teilnehmen?
+        p Ja gerne. Dann gilt: halber Preis.
+
+        h5 8. Ich weiß nicht ob Capoeira mir Gefällt.
+        p Dann kannst du erst mal nur an einem Tag teilnehmen um reinzuschnuppern.
+
+        h5 9. Was kommt nach dem Workshop? Wo kann ich Capoeira praktizieren?
+        p Im UniSport Trier. Auch wenn Du kein(e) Student(in) bist. 
+
+        h5 10. Gibt es eine Facebook-Event-Gruppe?
+        p Ja,&nbsp;
+         a(href='https://www.facebook.com/events/1466118650362185/') hier die Facebook-Event-Gruppe mit den aktuellsten Informationen.
+
+    .row
+      .large-12.columns: .panel
+        h4 Get in Touch
+        .row
+          .large-9.columns
+            p Eine frühzeitige Anmeldung ist erwünscht da die Teilnehmerzahl begrenzt ist. :-)
+          .large-3.columns
+            a.radius.button.right(href='#') Contact us
+
+    footer.row
+      .large-12.columns
+        hr
+        .row
+          .large-6.columns
+            p &copy; Copyright no one at all. Go to town.
+          .large-6.columns
+            ul.inline-list.right
+              li: a(href='#') Link1 
+              li: a(href='#') Link2 
+              li: a(href='#') Link3 –

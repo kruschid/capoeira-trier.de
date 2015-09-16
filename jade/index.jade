@@ -1,0 +1,187 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content="IE=edge")
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Capoeira Trier
+    link(href='css/main.css',rel='stylesheet')
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+    script(type='text/javascript',src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDhsRUuUV9tbiOuTdrqiasqwhgRCj4JLxU&sensor=false')
+    script
+      :coffee
+        google.maps.event.addDomListener window, 'load', ->
+          pos = new google.maps.LatLng(49.742510, 6.689411)
+          map = new google.maps.Map document.getElementById('locationmap'),
+            zoom: 17
+            center: pos
+            scrollwheel: false
+          marker = new google.maps.Marker
+            position: pos
+            map: map
+            title: 'test'
+          infoWindow = new google.maps.InfoWindow
+            content: '<h4>Halle 4 - uniSPORT Trier</h4>
+                      <ol>
+                        <li>Fahrzeug am gegenüberliegenden Parkplatz abstellen,</li>
+                        <li>den Haupteingang nehmen,</li>
+                        <li>durch die Umkleidekabinen gehen,</li>
+                        <li>links an den Schlie&szlig;fächern vorbei und</li>
+                        <li>am Ende schräg-rechts zur großen Glastür laufen. Willkommen!</li>
+                      </ol>'
+          infoWindow.open(map,marker)
+          google.maps.event.addListener marker, 'click', ->
+            infoWindow.open(map,marker)
+  body
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar')
+            span.sr-only Navigation öffnen bzw. schließen
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          span.navbar-brand Capoeira Trier
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li: a(href='#trainingszeiten') Trainingszeiten
+            li: a(href='#trainingsort') Trainingsort
+            li: a(href='#kontakt') Kontakt
+            li: a(href='#termine') Termine
+            li: a(href='#links') Links
+            li: a(href='#fotos') Fotos
+    .container
+      .row
+        .col-md-6 
+          #trainingszeiten.box
+            h2 Trainingszeiten
+            table.table
+              thead: tr
+                th Wochentag
+                th Uhrzeit
+              tbody 
+                tr
+                  td Dienstags
+                  td 19:00 - 20:30
+                tr 
+                  td Freitags
+                  td 19:00 - 20:30
+            p Trainiert wird in Halle 4 im Sporthallenkomplex uniSPORT Trier.
+            p Probetraining jederzeit möglich!
+            p Mindestalter 16 Jahre. Für Schüler, Azubis und Studenten gibt es vergünstigte Teilnahmebeträge.
+            p Nur Sporthose und T-Shirt erforderlich. Training erfolgt Barfuss oder mit Hallenschuhen.
+            h4 Zusatztraining
+            p Das Zusatztraining findet an anderen Trainingsorten statt und ist jeweils nach Absprache möglich.
+            table.table
+              thead: tr
+                th Wochentag
+                th Uhrzeit
+              tbody 
+                tr
+                  td Samstags
+                  td
+                    | 13:00 - 14:30
+                    br
+                    | Krafttraining, Palastgarten
+                tr
+                  td Sonntags
+                  td
+                    | 20:00 - 22:00
+                    br
+                    | Freies Training, Hochschule Trier
+          #trainingsort.box
+            h2 Trainingsort
+            #locationmap
+        .col-md-6
+          #kontakt.box
+            h2 Kontakt
+            address
+              | Denis Kruschinski 
+              br
+              | Salvianstraße 5
+              br
+              | 54290 Trier
+              br
+              | GERMANY
+              br
+              abbr(title='Telefon, SMS & WhatsApp') Tel:
+              |  0178 5222 954
+              br
+              abbr(title='Elektornische Postadresse') E-Mail:
+              |  tudobem (@capoeira-trier.de)  
+          #termine.box
+            h2 Termine
+              //- h4 uniSPORT-Queerbeet 
+              //- p Mittwoch, 29. Oktober 2014, 18:00 - 18:45 Uhr
+              //- h4 Metropolis Capoeira Show
+              //- p Mittwoch, 5. November 2014, 22:00 Uhr
+              //- h4 Training in der Realschule Plus in Saarburg
+              //- p Samstag, 29. November 2014, 10:00 - 12:00 Uhr
+              //- h4 Fit &amp; Fun Marathon FSV Trier-Tarforst
+              //- p Samstag, 29. November 2014, 15:00 - 18:00 Uhr
+              //- h4 Weihnachtsworkshop E.C.U. Internacional Saarbrücken
+              //- p 
+              //-   | Sa, 13. - So, 14. Dezember 2014
+              //-   br
+              //-   | Information und Anmeldung:             
+              //-   a(href='http://www.paulocapoeira.de') Capoeira-Schule E.C.U. Internacional Saarbrücken
+              //- h4 Weihnachtsferien
+              //- p 
+              //-   | Mo, 22. Dezember 2014 - Fr, 2. Januar 2015
+              //-   br 
+              //-   | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
+              //-   | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
+              //- h4 Fastnacht (Kein Training)  
+              //- p Dienstag, 17. Februar 2015
+              //- h4 Ostern 2015
+              //- p 
+              //-   | Mo, 30. März 2015 - Fr, 10. April 2015
+              //-   br 
+              //-   | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
+              //-   | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
+              //- h4 Tag der Arbeit (Kein Training)
+              //- p Freitag, 1. Mai 2015
+              h4 Sommerferien 2015
+              p 
+                | Mo, 03. August 2015 - Fr, 04. September 2015
+                br 
+                | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
+                | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
+              h4 Weihnachten 2015
+              p 
+                | Mo, 21. Dezember 2015 - Fr, 01. Januar 2016
+                br 
+                | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
+                | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
+          #links.box
+            h2 Links
+            ul
+              li: a(href='http://www.uni-trier.de/index.php?id=9458') Universität Trier uniSPORT
+              li: a(href='http://www.paulocapoeira.de') Capoeira-Schule E.C.U. Internacional Saarbrücken
+              li: a(href='https://www.facebook.com/CapoeiraPassion') Capoeira Passion (Facebook)
+              li: a(href='https://www.youtube.com/watch?v=hPCAKmRTq5s') Capoeira Trainingsvideo (YouTube)
+              li: a(href='https://www.facebook.com/groups/290572501038045/') Facebook-Gruppe (Facebook)
+      #fotos.box
+        h2 Fotos
+        #mediacarousel.carousel.slide(data-ride='carousel')
+          ol.carousel-indicators
+            - var images = ['001.jpg', '002.jpg', '003.jpg', '004.jpg', '005.jpg', '006.jpg', '007.jpg', '008.jpg', '009.jpg', '010.jpg',]
+            each image, index in images
+              if index == 0
+                li.active(data-target='#mediacarousel', data-slide-to=index)
+              else
+                li(data-target='#mediacarousel', data-slide-to=index)
+          .carousel-inner
+            each image, index in images
+              if index == 0
+                .item.active: img(src="img/#{image}", alt='...')
+              else
+                .item: img(src='img/#{image}', alt='...')
+          a.left.carousel-control(href='#mediacarousel', role='button', data-slide='prev')
+            span.glyphicon.glyphicon-chevron-left
+          a.right.carousel-control(href='#mediacarousel', role='button', data-slide='next')
+            span.glyphicon.glyphicon-chevron-right
+  script(src='js/jquery.min.js', type='text/javascript')
+  script(src='js/bootstrap.min.js', type='text/javascript')
