@@ -97,7 +97,7 @@ gulp.task 'watch', ['build'], ->
   gulp.watch [files.jade, files.data], ['jade']
   gulp.watch files.sass, ['sass']
 
-gulp.task('deploy',  ->
+gulp.task('deploy', ['build'],  ->
   gulp.src files.public 
-  .pipe ghPages()
+    .pipe ghPages()
 ) # deploy
