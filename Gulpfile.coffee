@@ -5,7 +5,7 @@ sass = require('gulp-sass')
 jade = require('gulp-jade')
 rename = require('gulp-rename')
 image = require('gulp-image')
-livereload = require('gulp-livereload')
+server = require('gulp-server-livereload')
 del = require('del')
 ghPages = require('gulp-gh-pages')
 
@@ -26,7 +26,7 @@ files =
   sass:   "#{paths.sass}*.sass"
   data:   "#{paths.data}*.coffee"
   images: "#{paths.images}*"
-  public: "#{paths.public}**/*"
+  # public: "#{paths.public}**/*"
 
 gulp.task 'clean', (cb) ->
   del paths.public, cb
@@ -43,11 +43,7 @@ gulp.task 'copy', ['install'], ->
     "#{paths.bower}jquery/dist/jquery.min.js"
   ]
     .pipe gulp.dest(paths.publicJS) 
-  # images
-  gulp.src files.images
-    .pipe image()
-    .pipe gulp.dest(paths.publicImages)
-  # fonts
+  # fonts (deprecated)
   gulp.src "#{paths.bower}bootstrap-sass/assets/fonts/bootstrap/*"
     .pipe gulp.dest(paths.publicFonts)
 
@@ -55,14 +51,19 @@ gulp.task 'build', ['copy'], ->
   # jade & sass
   gulp.tasks.jade.fn()
   gulp.tasks.sass.fn()
+  gulp.tasks.images.fn()
+
+gulp.task 'images', ->
+  gulp.src files.images
+    .pipe image()
+    .pipe gulp.dest(paths.publicImages)
 
 gulp.task 'jade', ->
   # static jade files
   gulp.src files.jade
-  .pipe plumber()
-  .pipe jade()
-  .pipe gulp.dest(paths.public)
-  .pipe livereload()
+    .pipe plumber()
+    .pipe jade()
+    .pipe gulp.dest(paths.public)
 
   # # jade tempaltes
   # data = require("./#{paths.data}personen.coffee")
@@ -90,14 +91,20 @@ gulp.task 'sass', ->
     .pipe plumber()
     .pipe sass(params)
     .pipe gulp.dest(paths.publicCSS)
-    .pipe livereload()
 
 gulp.task 'watch', ['build'], ->
-  livereload.listen()
   gulp.watch [files.jade, files.data], ['jade']
   gulp.watch files.sass, ['sass']
+  gulp.watch files.images, ['images']
+  serverParams = 
+    livereload: true
+    directoryListing: false
+    open: false
+  gulp.src paths.public
+    .pipe server(serverParams)
+
 
 gulp.task('deploy', ['build'],  ->
-  gulp.src files.public 
+  gulp.src paths.public 
     .pipe ghPages()
 ) # deploy

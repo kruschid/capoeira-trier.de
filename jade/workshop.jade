@@ -5,13 +5,13 @@ html(lang='en')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title Capoeira Workshop in Trier 2015 
-    link(href='css/main.css', rel='stylesheet')
+    link(href='css/workshop.css', rel='stylesheet')
     script(type='text/javascript',src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDhsRUuUV9tbiOuTdrqiasqwhgRCj4JLxU&sensor=false')
     script
       :coffee
         google.maps.event.addDomListener window, 'load', ->
           pos = new google.maps.LatLng(49.7424362,6.6941286)
-          map = new google.maps.Map document.getElementById('workshop-location'),
+          map = new google.maps.Map document.getElementById('location-map'),
             zoom: 17
             center: pos
             scrollwheel: false
@@ -32,84 +32,114 @@ html(lang='en')
           google.maps.event.addListener marker, 'click', ->
             infoWindow.open(map,marker)
   body
-    .row
-      .large-3.columns
-        //- h1: img(src="http://placehold.it/400x100&text=Logo")
-      .large-9.columns
-        ul.right.button-group
-          li: a.button.active(href='index.html') Workshop Trier 2015
-          li: a.button(href='capoeira-trier.html') Uni-Sport Capoeira Trier 
-          li: a.button(href='kontakt.html') Kontakt
-    .row
+    #header.row: .small-6.small-offset-3.columns
+      img(src='img/workshop-header.png')
+
+    div(data-magellan-expedition='fixed')
+      .contain-to-grid
+        nav.top-bar(data-topbar, role='navigation')
+          ul.title-area
+            li.name: h1: a(href='index.html') Capoeira-Trier 
+            li.toggle-topbar.menu-icon: a(href='#'): span Menu
+          section.top-bar-section
+            ul.right
+              li(data-magellan-arrival='background-information'): a(href='#background-information') Hintergrund
+              li(data-magellan-arrival='instructor'): a(href='#instructor') Referent
+              li(data-magellan-arrival='capoeira-information'): a(href='#capoeira-information') Capoeira 
+              li(data-magellan-arrival='location'): a(href='#location') Ort &amp; Anfahrt
+              li(data-magellan-arrival='schedule'): a(href='#schedule') Programm
+              li(data-magellan-arrival='faq'): a(href='#faq') Fragen
+              li(data-magellan-arrival='contact'): a(href='#contact') Anmeldung &amp; Kontakt
+    
+    .row#background-information(data-magellan-destination='background-information', data-equalizer)
       .large-12.columns
-        .slider
-          img(src='http://placehold.it/1000x400&text=[ img 1 ]')
-        hr
-
-    .row 
+        h3 Hintergrund zum Workshop
       .large-4.columns
-        img(src='img/workshop-hintergrund.jpg', width='400')
-        h4 Hintergrund
-        p Bei einer Reise im Frühling 2015 nach Sankt Petersburg lernte Denis Kruschinski (Übungsleiter Capoeira UniSport-Trier) 
-          | auf einem Seminar mit Mestre Chiquinho Juan Duarte und Maria Emelianenkova kennen, welche die dortige Gruppe Senzala 
-          | Capoeira Sankt Petersburg leiten. Die Art und Weise wie Neulinge in dieser Gruppe aufgenommen und integriert werden 
-          | haben Denis stark beeindruckt. Wenn man noch fremd in einer Stadt ist, kann es manchmal schwer sein Anschluss zu finden. 
-          | Doch nach dem Workshop kamen Einladungen zum gemeinsamen Capoeira Training 
-          | zum Akrobatik-Training und zu Tanzabenden, welche bis fünf Uhr morgens andauerten. Juan und Maria stellten viele Fragen
-          | zu Trier und unserer Capoeira-Gruppe. Obwohl sie bereits viel in Europa und Südamerika gereist sind, haben sie Deutschland
-          | noch nie gesehen. Denis beschloss die beiden nach Trier einzuladen.
-
+        img.th(src='img/workshop-sankt-petersburg.jpg')
+        .panel(data-equalizer-watch)
+          h4 Reise nach Sankt Petersburg
+          p Bei einer Reise im Frühling 2015 nach Sankt Petersburg lernte Denis Kruschinski (Übungsleiter Capoeira UniSport-Trier) 
+            | auf einem Seminar mit Mestre Chiquinho Juan Duarte und Maria Emelianenkova kennen, welche die dortige Gruppe Senzala 
+            | Capoeira Sankt Petersburg leiten. Der Capoeira-Stil, das Training mit Mestre Chiquinho, das Spiel mit Juan und seinen Schülern,
+            | der gegenseitige Umgang miteinander sowie die Art und Weise wie Neulinge in dieser Gruppe aufgenommen und integriert werden 
+            | haben Denis stark beeindruckt. Wenn man noch fremd in einer Stadt ist, kann es manchmal schwer sein Anschluss zu finden. 
+            | Doch nach dem Workshop kamen Einladungen zum gemeinsamen Capoeira Training 
+            | zum Akrobatik-Training und zu Tanzabenden, welche bis fünf Uhr morgens andauerten. Juan und Maria stellten viele Fragen
+            | zu Trier und unserer Capoeira-Gruppe. Obwohl sie bereits viel in Europa und Südamerika gereist sind, haben sie Deutschland
+            | noch nie gesehen. Denis beschloss die beiden nach Trier einzuladen.
       .large-4.columns
-        img(src='img/workshop-juan.jpg', width='400')
-        h4 Juan Carlos Duarte Espitia
-        p Juan kommt Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.
+        img.th(src='img/workshop-juan.jpg')
+        .panel(data-equalizer-watch)
+          h4 Juan Duarte
+          p Juan Duarte ist in Bogotá, der Hauptstadt Kolumbiens, geboren und feierte vor wenigen Tagen im September 2015 sein 15 Jähriges bestehen in der Capoeira-Welt. 
+            | Vor knapp einem Jahrzehnt war er bereits einer der Verantwortlichen für die Koordination und Organisation der Guppe Senzala-Capoeira in Kolumbien. 
+            | Die weltweit gut vernetzte Capoeira-Community ermöglichte Juan viel zu Reisen und einen intensiven Austausch mit anderen Capoeira-Gruppen zu pflegen.
+            | Durch diese Gegebenheiten konnte Juan über die Zeit ein großes Wissen über die komplexe Capoeira-Welt aufbauen. Er kehrte nach mehrere Jahren des Praktizierens
+            | bei anderen Capoeira-Gruppen schließlich zu Senzala-Capoeira zurück. Heute leitet er mit Maria seine eigenen Capoeira-Schule in Sankt Petersburg, wo er sowohl Erwachsene 
+            | als auch Kinder unterrichtet. Zusätzlich veranstaltet Juan als professioneller Tanzlehrer in Sankt Petersburg regelmäßig Workshops für Salsa, Bachata und Kizomba.
       .large-4.columns
-        img(src='img/workshop-senzala.jpg', width='400')
-        h4 Senzala Capoeira St. Petersburg
-        p Den ersten Kontakt zur Gruppe Capoeira Senzala hatte Maria Emelianenkova bei einem Workshop mit Mestre Toni Vargas in Kolumbien. 
-          | Beeindruckt vom Stil, Musik und vor allem dem gegenseitigen Umgang innerhalb der Gruppe. Danach lernte sie Mestre Chiquinho 
-          | welcher regelmäßig nach Sankt Petersburg reist um die dortige Gruppe zu Unterrichten.
+        img.th(src='img/workshop-senzala-sankt-petersburg.jpg')
+        .panel(data-equalizer-watch)
+          h4 Senzala-Capoeira Sankt Petersburg
+          p Die Senzala-Niederlassung in Sankt Petersburg ist noch eine recht junge Capoeira-Gruppe. Sie wurde vor über zwei Jahren von Juan Duarte und 
+            | Maria Emelianenkova gegründet und unterliegt der künstlerischen Leitung von Mestre Chiquinho aus Budapest in Ungarn. 
+            | Die Capoeira-Schule in Sankt Petersburg ist ein Teil der weltweiten Organisation Senzala-Capoeira. Das heißt, dass sie die Tradition
+            | der Gruppe Senzala-Capoeira fortführt. Senzala wurde 1963 in einer Nachbarschaft in Rio de Janeiro von eine Gruppe junger Capoeiristas gegründet. Diese 
+            | Gruppe entwickelte in ihrer Anfangszeit einen unverwechselbaren Stil, welcher später die Grundform für die #[em Capoeira Contemporanea] bildete, ein 
+            | Capoeira-Stil, welcher schnell zu großer Popularität kam und heute eine der Hauptsäulen der Capoeira ist. Ein wesentlicher Grund für das
+            | lange Bestehen der Senzala-Gruppe ist nicht zuletzt der respektvolle Umgang miteinander. Jeder Senzala-Lehrer verpflichtet sich alle sechs 
+            | Monate an einem zweiwöchigen Lehrgang teilzunhemen, um die hohen Qualitätsstandards der Organisation erhalten zu können.
 
+    .row#instructor(data-magellan-destination='instructor')
+      .large-12.columns
+        h3 Der Referent: Juan Duarte
+      .large-12.columns: .panel
+        .flex-video: iframe(width='420', height='315', src='https://www.youtube.com/embed/5In7XsXO_kY', frameborder='0', allowfullscreen)
 
-    .row: .large-12.columns: .panel
-      h4 Ort und Anfahrt
-      #workshop-location
-
-    .row 
+    .row#capoeira-information(data-magellan-destination='capoeira-information', data-equalizer)
+      .large-12.columns
+        h3 Informationen zu Capoeira
       .large-4.columns
-        img(src='img/workshop-training.jpg', width='400')
-        h4 Capoeira
-        p Afrikanische Sklaven in Brasilien tarnten ihr Kampfsportraining als Tanz. So entstand die Capoeira und 
-          | ermöglichte ihnen Selbstverteidigung zu erlerenen um sich zu befreien. Spielerisch werden Bewegungen aus 
-          | bekannten Kampfkünsten mit akrobatischen Elementen kombiniert oder mit Tanzelementen verschleiert, so 
-          | dass eine explosive Mischung entsteht. Die Teilnehmer erleben ein anspruchsvolles Ganzkörpertraining 
-          | bei dem sie Rhythmik, Koordination und Reaktionsvermögen perfektionieren.
+        img.th(src='img/workshop-training.jpg')
+        .panel(data-equalizer-watch)
+          h4 Capoeira
+          p Afrikanische Sklaven in Brasilien tarnten ihr Kampfsportraining als Tanz. So entstand die Capoeira und 
+            | ermöglichte ihnen Selbstverteidigung zu erlerenen um sich zu befreien. Spielerisch werden Bewegungen aus 
+            | bekannten Kampfkünsten mit akrobatischen Elementen kombiniert oder mit Tanzelementen verschleiert, so 
+            | dass eine explosive Mischung entsteht. Die Teilnehmer erleben ein anspruchsvolles Ganzkörpertraining 
+            | bei dem sie Rhythmik, Koordination und Reaktionsvermögen perfektionieren.
       .large-4.columns
-        img(src='img/workshop-musik.jpg', width='400')
-        h4 Musik
-        p Musik spielt in der Capoeira die Hauptrolle. Das wichtigste Instrument ist die Berimbau. Sie leitet das Spiel in 
-          | der Roda (vergleichbar mit Sparring) und bestimmt auch den Kontext des Spiels. Manchmal kann ein Spiel freundlich
-          | sein, das heißt frei von geraden Tritten, welche für Anfänger schwer vorauszusehen sind, aber auch taktisch und hinterlistig, was
-          | grade für Anfänger sehr gefährlich sein kann, weil aus einem Langsamen Spiel plötzlich ein schneller Tritt möglich wäre.
-          | Weitere bekannte Instrumente sind zum Beispiel die Atabaque und das Pandeiro. Die Lieder werden auf Portugiesisch gesungen
-          | und stammen unter anderem aus der Sklavenzeit.
+        img.th(src='img/workshop-musik.jpg')
+        .panel(data-equalizer-watch)
+          h4 Musik
+          p Musik spielt in der Capoeira die Hauptrolle. Das wichtigste Instrument ist die Berimbau. Sie leitet das Spiel in 
+            | der Roda (vergleichbar mit Sparring) und bestimmt auch den Kontext des Spiels. Manchmal kann ein Spiel freundlich
+            | sein, das heißt frei von geraden Tritten, welche für Anfänger schwer vorauszusehen sind, aber auch taktisch und hinterlistig, was
+            | grade für Anfänger sehr gefährlich sein kann, weil aus einem Langsamen Spiel plötzlich ein schneller Tritt möglich wäre.
+            | Weitere bekannte Instrumente sind zum Beispiel die Atabaque und das Pandeiro. Die Lieder werden auf Portugiesisch gesungen
+            | und stammen unter anderem aus der Sklavenzeit.
       .large-4.columns
-        img(src='img/workshop-bateria.jpg', width='400')
-        h4 Das Spiel in der Roda
-        p Bei der #[em Roda] (portugiesisch für Kreis) stehen die Teilnehmer in einem Kreis. In diesem Kreis findet 
-          | das Capoeira-Spiel statt, eine Art Frage-und-Antwort-Spiel, ein körperlicher Dialog. Dabei kann eine Bewegung als Frage
-          | verstanden werden und die Antwort vom Partner kommt ebenfalls in Form einer Bewegung. 
-          | "Ob dabei eher die Kooperation oder die Konfrontation im Vordergrund steht, entscheiden die Spieler selbst" [Wikipedia:Capoeira]
-          | Das Spiel kann jederzeit einfach so beendet werden.
+        img.th(src='img/workshop-roda.jpg')
+        .panel(data-equalizer-watch)
+          h4 Das Spiel in der Roda
+          p Bei der #[em Roda] (portugiesisch für Kreis) stehen die Teilnehmer in einem Kreis. In diesem Kreis findet 
+            | das Capoeira-Spiel statt, eine Art Frage-und-Antwort-Spiel, ein körperlicher Dialog. Dabei kann eine Bewegung als Frage
+            | verstanden werden und die Antwort vom Partner kommt ebenfalls in Form einer Bewegung. 
+            | "Ob dabei eher die Kooperation oder die Konfrontation im Vordergrund steht, entscheiden die Spieler selbst" [Wikipedia:Capoeira]
+            | Das Spiel kann jederzeit einfach so beendet werden.
 
-    .row: .large-12.columns
-      h4 Der Referent: Juan Duarte
-      .flex-video: iframe(width='420', height='315', src='https://www.youtube.com/embed/5In7XsXO_kY', frameborder='0', allowfullscreen)
+    .row#location(data-magellan-destination='location')
+      .large-12.columns
+        h3 Ort und Anfahrt 
+      .large-12.columns: .panel
+        #location-map
 
-    .row
-      .large-12.columns: h4 Programm
+
+    .row#schedule(data-magellan-destination='schedule')
+      .large-12.columns
+        h3 Programm
       .large-6.columns
-        h5 Samstag, 17. Oktober (Tag 1)
+        h4 Samstag, 17. Oktober (Tag 1)
         table
           thead: tr
             th Uhrzeit 
@@ -130,7 +160,7 @@ html(lang='en')
               td Salvianstraße (privat)
 
       .large-6.columns
-        h5 Sonntag, 18. Oktober (Tag 2)
+        h4 Sonntag, 18. Oktober (Tag 2)
         table
           thead: tr
             th Uhrzeit
@@ -139,7 +169,7 @@ html(lang='en')
           tbody
             tr
               td 10:00-12:00
-              td Gemeinsames Frühstück mit Portugiesisch Crash-Kurs (optinal)
+              td Gemeinsames Frühstück mit Portugiesisch Crash-Kurs (optional)
               td Salvianstraße (privat)
             tr
               td: strong 13:00-16:00
@@ -150,10 +180,10 @@ html(lang='en')
               td Gemeinsames Abendessen (optional)
               td Spontane Entscheidung
       
-    .row 
+    .row#faq(data-magellan-destination='faq')
+      .large-12.columns
+        h3 Fragen und Antworten
       .large-12.columns: .panel
-        h4 Fragen und Antworten
-
         h5 1. Welche Ausrüstung ist zum Workshop mitzubringen?
         p T-Shirt, Sporthose und ein paar Hallenschuhe. Übrlicherweise wird ohne Schuhe und Socken trainiert. 
           | Die Schuhe wirst Du wahrscheinlich trozdem brauchen. ;-)
@@ -171,8 +201,8 @@ html(lang='en')
         h5 5. Ich möchte nur beim Capoeira-Unterricht teilnehen aber nicht beim Frühstück/Party/Essen. Ist das möglich?
         p Ja klar.
 
-        h5 6. Frage gestrichen.
-        p Antwort gestrichten.
+        h5 6. Was kostet der Workshop?
+        p Siehe #[a(href='#contact') Kontakt und Anmeldung].
         
         h5 7. Darf ich an nur einem Tag teilnehmen?
         p Ja gerne. Dann gilt: halber Preis.
@@ -184,26 +214,52 @@ html(lang='en')
         p Im UniSport Trier. Auch wenn Du kein(e) Student(in) bist. 
 
         h5 10. Gibt es eine Facebook-Event-Gruppe?
-        p Ja,&nbsp;
-         a(href='https://www.facebook.com/events/1466118650362185/') hier die Facebook-Event-Gruppe mit den aktuellsten Informationen.
+        p Ja, hier die&nbsp;
+         a(href='https://www.facebook.com/events/1466118650362185/') Facebook-Event-Gruppe 
+         | mit den aktuellsten Informationen.
 
-    .row
-      .large-12.columns: .panel
-        h4 Get in Touch
+        h5 11. Was kostet ein Caipirinha auf der Party?
+        p Null Euro. \o/ ;-)
+        
+        h5 12. Ich trinke kein Caipirinha. Bekomme ich einen reduzierten Eintrittspreis für den Workshop?
+        p Nein, die Caipirinhas sind ein Geschenk der Capoeira-Gruppe-Trier und werden nicht vom Teilnahmebeitrag gedeckt.
+          | Die Partylocation wird von der netten Salvianstraße-Community ebenfalls kostenfrei für unsere &bdquo;Halbzeitfeier&ldquo; bereitgestellt. 
+
+        h5 13. Ich komme nicht von Trier. Gibt es Schlafgelegenheiten?
+        p Ja die gibts es. Bitte vorher Bescheid geben. 
+
+        h5 14. Wer darf teilnehmen?
+        p Aus organisatorischen Gründen ist ein Mindestalter von 16 Jahren vorgegeben. Ansonsten gilt: Capoeira ist für  
+          | Frauen und Männer. Nur der, der es nicht möchte lernt es nicht.
+        p Übrigens: In Berlin gibt es eine Gruppe aus 17 
+          | Rentnern, 60 bis 80 Jahre alt, welche Capoeira praktizieren und dabei jeden Tritt genießen! 
+
+        h5 15. Ist das gemeinsame Essen im Preis inbegriffen?
+        p Nein, wir suchen uns ein Restaurant/Imbiss/Kneipe und jeder bezahlt für sich.
+
+        h5 16. Wie läuft das geminsame Frühstück ab? Soll ich was mitbringen?
+        p Ja. Der Plan ist, dass jeder eine Kleinigkeit für sich und die anderen Teilnhemer mitbring, so dass alle satt, zufrieden 
+        | und mit genügend Energie in die zweite Hälfte des Workshops starten können. 
+
+    .row#contact(data-magellan-destination='contact', data-equalizer)
+      .large-12.columns
+        h3 Anmeldung und Kontakt
         .row
-          .large-9.columns
-            p Eine frühzeitige Anmeldung ist erwünscht da die Teilnehmerzahl begrenzt ist. :-)
-          .large-3.columns
-            a.radius.button.right(href='#') Contact us
+          .large-7.columns: .panel(data-equalizer-watch)
+            h4 Anmeldung
+            p Die Anmeldung wird demnächst freigeschaltet. Dabei wird auch der Teilnahmebeitrag bekannt gegeben.
+          .large-5.columns: .panel(data-equalizer-watch)
+            h4 Kontakt
+            p Fragen bitte per E-Mail an:
+            p: strong tudobem (at) capoeira-trier.de
+            p oder SMS bzw. WhatsApp-Nachricht an:
+            p: strong +49 178 5222 954
 
     footer.row
       .large-12.columns
         hr
-        .row
-          .large-6.columns
-            p &copy; Copyright no one at all. Go to town.
-          .large-6.columns
-            ul.inline-list.right
-              li: a(href='#') Link1 
-              li: a(href='#') Link2 
-              li: a(href='#') Link3 –
+        p.text-right &copy; 2015 | Denis Kruschinski | Salvianstraße 5 | 54290 Trier | +491785222954
+  script(src='js/jquery.min.js', type='text/javascript')
+  script(src='js/foundation.min.js', type='text/javascript')
+  script
+    $(document).foundation();
