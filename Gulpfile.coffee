@@ -8,6 +8,7 @@ image = require('gulp-image')
 server = require('gulp-server-livereload')
 del = require('del')
 ghPages = require('gulp-gh-pages')
+gulpSequence = require('gulp-sequence')
 
 paths =
   bower:  'bower_components/'
@@ -26,7 +27,7 @@ files =
   sass:   "#{paths.sass}*.sass"
   data:   "#{paths.data}*.coffee"
   images: "#{paths.images}*"
-  # public: "#{paths.public}**/*"
+  public: "#{paths.public}**/*"
 
 gulp.task 'clean', (cb) ->
   del paths.public, cb
@@ -46,12 +47,11 @@ gulp.task 'copy', ['install'], ->
   # fonts (deprecated)
   gulp.src "#{paths.bower}bootstrap-sass/assets/fonts/bootstrap/*"
     .pipe gulp.dest(paths.publicFonts)
+  # cname
+  gulp.src 'CNAME'
+    .pipe gulp.dest(paths.public)
 
-gulp.task 'build', ['copy'], ->
-  # jade & sass
-  gulp.tasks.jade.fn()
-  gulp.tasks.sass.fn()
-  gulp.tasks.images.fn()
+gulp.task 'build', ['copy'], gulpSequence(['jade', 'sass', 'images']) 
 
 gulp.task 'images', ->
   gulp.src files.images
@@ -103,8 +103,7 @@ gulp.task 'watch', ['build'], ->
   gulp.src paths.public
     .pipe server(serverParams)
 
-
 gulp.task('deploy', ['build'],  ->
-  gulp.src paths.public 
+  gulp.src files.public 
     .pipe ghPages()
 ) # deploy
