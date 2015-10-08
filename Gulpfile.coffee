@@ -100,6 +100,7 @@ gulp.task 'watch', ['build'], ->
     livereload: true
     directoryListing: false
     open: false
+    port: 8000
   gulp.src paths.public
     .pipe server(serverParams)
 
