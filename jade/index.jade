@@ -13,27 +13,35 @@ html
     script
       :coffee
         google.maps.event.addDomListener window, 'load', ->
-          pos = new google.maps.LatLng(49.742510, 6.689411)
+          posCenter = new google.maps.LatLng(49.743369, 6.689139)
+          posHalle = new google.maps.LatLng(49.742510, 6.689411)
+          posParkplatz = new google.maps.LatLng(49.743876, 6.688644)
+          
+          # maps
           map = new google.maps.Map document.getElementById('locationmap'),
-            zoom: 17
-            center: pos
+            zoom: 16
+            center: posCenter
             scrollwheel: false
-          marker = new google.maps.Marker
-            position: pos
+          
+          # Halle
+          markerHalle = new google.maps.Marker
+            position: posHalle
             map: map
-            title: 'test'
-          infoWindow = new google.maps.InfoWindow
-            content: '<h4>Halle 4 - uniSPORT Trier</h4>
-                      <ol>
-                        <li>Fahrzeug am gegenüberliegenden Parkplatz abstellen,</li>
-                        <li>den Haupteingang nehmen,</li>
-                        <li>durch die Umkleidekabinen gehen,</li>
-                        <li>links an den Schlie&szlig;fächern vorbei und</li>
-                        <li>am Ende schräg-rechts zur großen Glastür laufen. Willkommen!</li>
-                      </ol>'
-          infoWindow.open(map,marker)
-          google.maps.event.addListener marker, 'click', ->
-            infoWindow.open(map,marker)
+          infoWindowHalle = new google.maps.InfoWindow
+            content: '<strong>uniSPORT Trier</strong>'
+          infoWindowHalle.open(map,markerHalle)
+          google.maps.event.addListener markerHalle, 'click', ->
+            infoWindowHalle.open(map,markerHalle)
+
+          # Parkplatz
+          markerParkplatz = new google.maps.Marker
+            position: posParkplatz
+            map: map
+          infoWindowParkplatz = new google.maps.InfoWindow
+            content: '<strong>Parkplatz der Universität Trier</strong>'
+          infoWindowParkplatz.open(map,markerParkplatz)
+          google.maps.event.addListener markerParkplatz, 'click', ->
+            infoWindowParkplatz.open(map,markerParkplatz)
   body
     nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
       .container-fluid
@@ -55,17 +63,17 @@ html
     .container
       .row
         .col-md-6 
-          .box 
-            h2 Capoeira Workshop
-            p.text-center
-              a(href='workshop.html'): img(src='img/workshop-header.png', width='70%')
-            h4 Senzala Capoeira Workshop
-            p Mitte Oktober 2015 findet in Zusammenarbeit mit der Gruppe Senzala Capoeira Sankt Petersburg ein mehrtätiger Workshop in Trier statt.
-              | Sowohl Neulinge als auch fortgeschrittene Capoeiristas können an diesem Ereignis teilnehmen. 
-              | Neben Capoeira Bewegungen wird auch Wissen über die Geschichte und Kultur Brasiliens und der Capoeira vermittelt.
-              | Ausführliche Informationen findest Du unter: 
-            p.text-center
-              a.btn.btn-primary(href='workshop.html') Senzala Capoeira-Workshop Trier 2015 
+          // .box 
+          //   h2 Capoeira Workshop
+          //   p.text-center
+          //     a(href='workshop.html'): img(src='img/workshop-header.png', width='70%')
+          //   h4 Senzala Capoeira Workshop
+          //   p Mitte Oktober 2015 findet in Zusammenarbeit mit der Gruppe Senzala Capoeira Sankt Petersburg ein mehrtätiger Workshop in Trier statt.
+          //     | Sowohl Neulinge als auch fortgeschrittene Capoeiristas können an diesem Ereignis teilnehmen. 
+          //     | Neben Capoeira Bewegungen wird auch Wissen über die Geschichte und Kultur Brasiliens und der Capoeira vermittelt.
+          //     | Ausführliche Informationen findest Du unter: 
+          //   p.text-center
+          //     a.btn.btn-primary(href='workshop.html') Senzala Capoeira-Workshop Trier 2015 
           #trainingszeiten.box
             h2 Trainingszeiten
             table.table
@@ -83,29 +91,36 @@ html
             p Probetraining jederzeit möglich!
             p Mindestalter 16 Jahre. Für Schüler, Azubis und Studenten gibt es vergünstigte Teilnahmebeträge.
             p Nur Sporthose und T-Shirt erforderlich. Training erfolgt Barfuss oder mit Hallenschuhen.
-            h4 Zusatztraining
-            p Das Zusatztraining findet an anderen Trainingsorten statt und ist jeweils nach Absprache möglich.
-            table.table
-              thead: tr
-                th Wochentag
-                th Uhrzeit
-              tbody 
-                tr
-                  td Samstags
-                  td
-                    | 13:00 - 14:30
-                    br
-                    | Krafttraining, Palastgarten
-                tr
-                  td Sonntags
-                  td
-                    | 20:00 - 22:00
-                    br
-                    | Freies Training, Hochschule Trier
-        .col-md-6
+            //- h4 Zusatztraining
+            //- p Das Zusatztraining findet an anderen Trainingsorten statt und ist jeweils nach Absprache möglich.
+            //- table.table
+            //-   thead: tr
+            //-     th Wochentag
+            //-     th Uhrzeit
+            //-   tbody 
+            //-     tr
+            //-       td Samstags/Sonntags
+            //-       td
+            //-         | nach Aabsprache
+            //-         br
+            //-         | Training im Palastgarten
+                // tr
+                //   td Sonntags
+                //   td
+                //     | 20:00 - 22:00
+                //     br
+                //     | Freies Training, Hochschule Trier
           #trainingsort.box
             h2 Trainingsort
             #locationmap
+            h4 Wegbeschreibung
+            ol
+              li Fahrzeug am gegenüberliegenden Parkplatz abstellen,
+              li den Haupteingang nehmen,
+              li durch die Umkleidekabinen gehen,
+              li links an den Schlie&szlig;fächern vorbei und
+              li am Ende schräg-rechts zur großen Glastür laufen. Willkommen!
+        .col-md-6
           #kontakt.box
             h2 Kontakt
             address
@@ -160,22 +175,31 @@ html
               //-   br 
               //-   | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
               //-   | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
-              h4 Workshop Senzala-Capoeira 2015
-              p Sa, 17. Oktober und So, 18. Oktober 2015 #[br]
-                a.btn.btn-primary(href='workshop.html') Senzala Capoeira-Workshop Trier 2015 
-              h4 Weihnachten 2015
+              // h4 Workshop Senzala-Capoeira 2015
+              // p Sa, 17. Oktober und So, 18. Oktober 2015 #[br]
+              //   a.btn.btn-primary(href='workshop.html') Senzala Capoeira-Workshop Trier 2015 
+              // h4 Weihnachten 2015
+              // p 
+              //   | Mo, 21. Dezember 2015 - Fr, 01. Januar 2016
+              //   br 
+              //   | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
+              //   | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
+              //- h4 Ostern 2016
+              //- p 
+              //-   | Mo, 21. März 2015 - Fr, 1. April 2015
+              //-   br 
+              //-   | Es findet kein Training statt, da die Halle vom uniSPORT Trier in diesem Zeitraum geschlossen bleibt.
+              h4 Sommerferien 2016
               p 
-                | Mo, 21. Dezember 2015 - Fr, 01. Januar 2016
+                | Mo, 01. August 2016 - Fr, 09. September 2016
                 br 
                 | Die Halle vom uniSPORT Trier wird in diesem Zeitraum geschlossen bleiben. 
-                | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden.
+                | Das reguläre Training wird in diesem Zeitraum an einen anderen Trainingsort stattfinden (z.B. Palastgarten).
           #links.box
             h2 Links
             ul
               li: a(href='http://www.uni-trier.de/index.php?id=9458') Universität Trier uniSPORT
               li: a(href='http://www.paulocapoeira.de') Capoeira-Schule E.C.U. Internacional Saarbrücken
-              li: a(href='https://www.facebook.com/CapoeiraPassion') Capoeira Passion (Facebook)
-              li: a(href='https://www.youtube.com/watch?v=hPCAKmRTq5s') Capoeira Trainingsvideo (YouTube)
               li: a(href='https://www.facebook.com/groups/290572501038045/') Facebook-Gruppe (Facebook)
       #fotos.box
         h2 Fotos
